@@ -1,5 +1,4 @@
-# attrify/__init__.py
-from .core import Attribute, Modifier
+from .core import Attribute, DerivedAttribute, Actor
+from .utils import AttrifySerializer
 
-__version__ = "0.0.1"
-__all__ = ["Attribute", "Modifier"]
+__all__ = ["Attribute", "DerivedAttribute", "Actor", "AttrifySerializer"]

@@ -1,91 +1,125 @@
-# Attrify ⚔️
+# Attrify 🎮
 
-**Attrify** is a lightweight and powerful Python library for managing attributes, bonuses, and penalties in games. Stop dealing with manual "Strength + 5" calculations or worrying if potion bonuses are stacking incorrectly.
+**Attrify** is a lightweight, flexible, and data-driven attribute management system for RPGs and game engines. It handles complex math, derived stats, temporary buffs, and data serialization with ease.
 
-With Attrify, you focus on your game mechanics, and we handle the math.
+## Features
 
-## ✨ Key Features
+- **Dynamic Calculations**: Support for "Flat" and "Percent" modifiers.
+- **Attribute Derivation**: Create dependencies (e.g., `Mana` depends on `Intelligence`).
+- **Time-Aware**: Built-in engine to handle expiring buffs and debuffs.
+- **Anti-Stacking**: Tag-based system to prevent similar bonuses from stacking.
+- **Data-Driven**: Full support for JSON, YAML, and TOML.
+- **Templates**: Define character "blueprints" and spawn instances instantly.
 
-- Native RPG Mathematics: Automatic separation between fixed bonuses (flat) and multipliers (percent).
+---
 
-- Tag System (Anti-stacking): Prevent buffs of the same type from stacking (e.g., only the strongest potion takes effect).
+## Installation
 
-- Unique Identification: Add and remove specific modifiers using unique IDs.
+Install the core package:
 
-- Lightweight & Extensible: No heavy dependencies, easy to integrate with Pygame, Arcade, or even Godot (via Python).
-
-## 🚀 Installation
-
-_`Coming Soon!`_
-
-<!-- ```Bash
+```bash
 pip install attrify
-``` -->
+```
 
-## 🛠️ How to Use
+To enable YAML or TOML support, install the optional dependencies:
 
-#### 1. Creating an Attribute
+```Bash
+pip install attrify[yaml]
+pip install attrify[toml]
+
+# Or install everything
+pip install attrify[all]
+```
+
+## Quick Start
+
+#### 1. Basic Usage
 
 ```Python
-from attrify import Attribute
+from attrify.core import Actor
 
 
-# Define an attribute with a base value of 10
-strength = Attribute("Strength", 10)
+# Create a character
+
+hero = Actor("Artorias")
+
+# Add a base attribute
+
+hero.add_attribute("strength", 10)
+
+# Add a derived attribute (Attack = Strength \* 2.0)
+
+hero.add_derived("attack", parent_id="strength", multiplier=2.0)
+
+print(hero.attack.value) # Output: 20.0
 ```
 
-#### 2. Adding Modifiers
+#### 2. Modifiers and Buffs
 
 ```Python
 
-# Add a flat bonus of +5
-strength.add_modifier(mod_id="iron_sword", value=5, kind="flat")
+# Add a flat bonus (+5 Strength)
 
-# Add a 20% multiplier (multiplicative)
-strength.get_modifier(mod_id="warrior_rage", value=0.20, kind="percent")
+hero.strength.add_modifier("iron_sword", 5, kind="flat")
 
-print(strength.value) # (10 + 5) \* 1.2 = 18.0
+# Add a timed percentage buff (+10% Strength for 5 seconds)
+
+hero.strength.add_modifier("potion", 0.1, kind="percent", duration=5)
+
+# Automatic recalculation
+
+print(hero.attack.value) # (10 + 5) _ 1.1 _ 2.0 = 33.0
 ```
 
-#### 3. Using Tags to Prevent Stacking
+#### 3. Using Templates and Serialization
+
+Define your classes in YAML and spawn them:
+
+```YAML
+# warrior.yaml
+
+name: "Warrior Class"
+attributes:
+str: { type: "base", value: 15 }
+vit: { type: "base", value: 10 }
+hp: { type: "derived", parent_id: "vit", multiplier: 10.0 }
+```
 
 ```Python
+from attrify.utils import AttrifySerializer
 
-# If the player drinks two similar potions, only the highest one applies
-strength.add_modifier("agility_potion", 2, tag="potion")
-strength.add_modifier("god_potion", 10, tag="potion")
+# Load template
 
-print(strength.value) # The +2 bonus is ignored in favor of the +10
+warrior_tpl = AttrifySerializer.load_template("warrior.yaml")
+
+# Spawn a new instance
+
+my_hero = warrior_tpl.create_actor("Geralt")
+print(my_hero.hp.value) # Output: 100.0
 ```
 
-## 📐 The Formula
+## Advanced: The Tick Engine
 
-Attrify follows the standard used by most modern RPGs:
+To make temporary modifiers expire, integrate the TickEngine into your game loop:
 
+```Python
+from attrify.engines import TickEngine
+
+engine = TickEngine(my_hero)
+
+# Inside your game loop (delta_time in seconds/frames)
+
+engine.update(delta_time)
 ```
-FinalValue​ = ( Base + ∑Flat ) × ( 1 + ∑% )
-```
 
-## 🧪 Running Tests
+## Running Tests
 
-To ensure the math is always correct:
+Ensure everything is working correctly:
 
 ```Bash
 pytest
 ```
 
-## 🗺️ Roadmap
+## License
 
-[ ] Support for Derived Attributes (e.g., Agility affecting Critical Chance).
-
-[ ] Timed Modifiers (auto-expiry system).
-
-[ ] JSON/Dictionary export for Save Game systems.
-
----
-
----
-
-### 📄 License
-
-Distributed under the MIT License. See LICENSE for more information.
+MIT

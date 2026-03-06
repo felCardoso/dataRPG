@@ -1,0 +1,7 @@
+# Example Enemies Template using YAML
+
+name: "Goblin Scout"
+attributes:
+  str: { type: "base", value: 5 }
+  dex: { type: "base", value: 12 }
+  speed: { type: "derived", parent_id: "dex", multiplier: 1.5 }

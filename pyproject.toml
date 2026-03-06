@@ -4,18 +4,17 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "attrify"
-version = "0.0.1"
-authors = [{ name = "Felipe Cardoso", email = "pcardoso.felipe@gmail.com" }]
-description = "A lightweight RPG attribute and modifier management library."
+version = "0.1.0"
+description = "A data-driven attribute management system for RPGs"
 readme = "README.md"
+authors = [{ name = "Your Name", email = "your@email.com" }]
 requires-python = ">=3.8"
-classifiers = [
-    "Programming Language :: Python :: 3",
-    "License :: OSI Approved :: MIT License",
-    "Operating System :: OS Independent",
-    "Topic :: Games/Entertainment",
-]
 dependencies = []
+
+[project.optional-dependencies]
+yaml = ["PyYAML>=6.0"]
+toml = ["toml>=0.10.2"]
+all = ["PyYAML>=6.0", "toml>=0.10.2"]
 
 [project.urls]
 "Homepage" = "https://github.com/felCardoso/attrify"
