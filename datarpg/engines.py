@@ -1,7 +1,7 @@
 # import time
 import logging
 
-logger = logging.getLogger("attrify")
+logger = logging.getLogger("datarpg")
 
 
 class TickEngine:

@@ -1,6 +1,6 @@
 from pytest import approx
-from attrify.core import Actor
-from attrify.utils import AttrifySerializer, ActorTemplate
+from datarpg.core import Actor
+from datarpg.utils import AttrifySerializer, ActorTemplate
 
 # Using approx to handle floating point precision errors
 

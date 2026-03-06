@@ -1,6 +1,6 @@
-# Attrify 🎮
+# DataRPG 🎮
 
-**Attrify** is a lightweight, flexible, and data-driven attribute management system for RPGs and game engines. It handles complex math, derived stats, temporary buffs, and data serialization with ease.
+**DataRPG** is a lightweight, flexible, and data-driven attribute management system for RPGs and game engines. It handles complex math, derived stats, temporary buffs, and data serialization with ease.
 
 ## Features
 
@@ -18,17 +18,17 @@
 Install the core package:
 
 ```bash
-pip install attrify
+pip install datarpg
 ```
 
 To enable YAML or TOML support, install the optional dependencies:
 
 ```Bash
-pip install attrify[yaml]
-pip install attrify[toml]
+pip install datarpg[yaml]
+pip install datarpg[toml]
 
 # Or install everything
-pip install attrify[all]
+pip install datarpg[all]
 ```
 
 ## Quick Start
@@ -36,7 +36,7 @@ pip install attrify[all]
 #### 1. Basic Usage
 
 ```Python
-from attrify.core import Actor
+from datarpg.core import Actor
 
 
 # Create a character
@@ -86,7 +86,7 @@ hp: { type: "derived", parent_id: "vit", multiplier: 10.0 }
 ```
 
 ```Python
-from attrify.utils import AttrifySerializer
+from datarpg.utils import AttrifySerializer
 
 # Load template
 
@@ -103,7 +103,7 @@ print(my_hero.hp.value) # Output: 100.0
 To make temporary modifiers expire, integrate the TickEngine into your game loop:
 
 ```Python
-from attrify.engines import TickEngine
+from datarpg.engines import TickEngine
 
 engine = TickEngine(my_hero)
 

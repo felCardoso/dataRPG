@@ -2,7 +2,7 @@ import json
 import logging
 from .core import Actor
 
-logger = logging.getLogger("attrify")
+logger = logging.getLogger("datarpg")
 
 
 class AttrifySerializer:
@@ -38,7 +38,7 @@ class AttrifySerializer:
             import yaml
         except ImportError:
             raise ImportError(
-                "PyYAML is required for YAML support. Install with: pip install attrify[yaml]"
+                "PyYAML is required for YAML support. Install with: pip install datarpg[yaml]"
             )
 
         data = {
@@ -58,7 +58,7 @@ class AttrifySerializer:
             import yaml
         except ImportError:
             raise ImportError(
-                "PyYAML is required. Install with: pip install attrify[yaml]"
+                "PyYAML is required. Install with: pip install datarpg[yaml]"
             )
 
         if is_path:
@@ -75,7 +75,7 @@ class AttrifySerializer:
             import toml
         except ImportError:
             raise ImportError(
-                "toml is required for TOML support. Install with: pip install attrify[toml]"
+                "toml is required for TOML support. Install with: pip install datarpg[toml]"
             )
 
         data = {
@@ -94,7 +94,7 @@ class AttrifySerializer:
             import toml
         except ImportError:
             raise ImportError(
-                "toml is required. Install with: pip install attrify[toml]"
+                "toml is required. Install with: pip install datarpg[toml]"
             )
 
         with open(filepath, "r") as f:

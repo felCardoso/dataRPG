@@ -1,6 +1,6 @@
 import logging
 
-logger = logging.getLogger("attrify")
+logger = logging.getLogger("datarpg")
 # Prevents "No handler found" warnings if the user doesn't confifg it
 logger.addHandler(logging.NullHandler())
 

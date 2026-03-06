@@ -1,6 +1,6 @@
 import pytest
-from attrify.core import Attribute, DerivedAttribute, Actor
-from attrify.engines import TickEngine
+from datarpg.core import Attribute, DerivedAttribute, Actor
+from datarpg.engines import TickEngine
 
 
 def test_modifier_expiry():

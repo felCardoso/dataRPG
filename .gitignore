@@ -29,7 +29,6 @@ venv/
 ENV/
 
 # --- Testing / Coverage ---
-sandbox.py
 .pytest_cache/
 .tox/
 .nox/
